@@ -91,7 +91,6 @@
 
 // export default Hero;
 
-
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
