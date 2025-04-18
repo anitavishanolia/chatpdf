@@ -206,20 +206,7 @@ function Hero() {
             </p>
           </div>
 
-          {/* Image Preview */}
-          <div className="text-center w-full md:w-[80%] lg:w-[70%]">
-            <h2 className="text-2xl md:text-3xl font-bold text-cyan-500 mb-4">🖼️ Understand Images</h2>
-            <Image
-              className="rounded-2xl shadow-2xl"
-              alt="Image preview"
-              src={imageImage}
-              sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
-            />
-            <p className="mt-3 text-gray-500 dark:text-gray-400 text-sm md:text-base italic">
-              Extract context, diagrams or descriptions from any image using AI.
-            </p>
-          </div>
+          
 
           {/* Extra Upload Preview */}
           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
@@ -233,6 +220,20 @@ function Hero() {
             />
             <p className="mt-3 text-gray-500 dark:text-gray-400 text-sm md:text-base italic">
               Drop in any image or document — our model will break it down intelligently.
+            </p>
+          </div>
+          {/* Image Preview */}
+          <div className="text-center w-full md:w-[80%] lg:w-[70%]">
+            <h2 className="text-2xl md:text-3xl font-bold text-cyan-500 mb-4">🖼️ Understand Images</h2>
+            <Image
+              className="rounded-2xl shadow-2xl"
+              alt="Image preview"
+              src={imageImage}
+              sizes="100vw"
+              style={{ width: "100%", height: "auto" }}
+            />
+            <p className="mt-3 text-gray-500 dark:text-gray-400 text-sm md:text-base italic">
+              Extract context, diagrams or descriptions from any image using AI.
             </p>
           </div>
         </motion.div>
