@@ -92,7 +92,6 @@
 // export default Hero;
 
 
-
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
@@ -152,7 +151,7 @@ function Hero() {
             theme === "light" ? "text-gray-700" : "text-gray-300"
           }`}
         >
-          Your files aren't silent anymore. Upload any PDF, image or resume and get smart responses instantly. Powered by ChatGPT and Gemini.
+          {"Your files aren't silent anymore. Upload any PDF, image or resume and get smart responses instantly. Powered by ChatGPT and Gemini."}
         </motion.p>
 
         {/* Glassmorphism Buttons */}
@@ -176,8 +175,8 @@ function Hero() {
           className="mt-20 flex flex-col items-center gap-16"
         >
 
-           {/* PDF Preview */}
-           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
+          {/* PDF Preview */}
+          <div className="text-center w-full md:w-[80%] lg:w-[70%]">
             <h2 className="text-2xl md:text-3xl font-bold text-purple-500 mb-4">📚 Interact with PDFs</h2>
             <Image
               className="rounded-2xl shadow-2xl"
@@ -206,8 +205,6 @@ function Hero() {
             </p>
           </div>
 
-          
-
           {/* Extra Upload Preview */}
           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
             <h2 className="text-2xl md:text-3xl font-bold text-indigo-500 mb-4">🛠️ Custom File Analysis</h2>
@@ -222,6 +219,7 @@ function Hero() {
               Drop in any image or document — our model will break it down intelligently.
             </p>
           </div>
+
           {/* Image Preview */}
           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
             <h2 className="text-2xl md:text-3xl font-bold text-cyan-500 mb-4">🖼️ Understand Images</h2>
