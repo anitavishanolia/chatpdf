@@ -206,7 +206,7 @@ function Hero() {
 
           {/* Extra Upload Preview */}
           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
-            <h2 className="text-2xl md:text-3xl font-bold text-indigo-500 mb-4">🛠️ Custom File Analysis</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-indigo-500 mb-4">🖼️ Understand Images</h2>
             <Image
               className="rounded-2xl shadow-2xl"
               alt="Custom file preview"
@@ -221,7 +221,7 @@ function Hero() {
 
           {/* Image Preview */}
           <div className="text-center w-full md:w-[80%] lg:w-[70%]">
-            <h2 className="text-2xl md:text-3xl font-bold text-cyan-500 mb-4">🖼️ Understand Images</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-cyan-500 mb-4">🛠️ Custom File Analysis</h2>
             <Image
               className="rounded-2xl shadow-2xl"
               alt="Image preview"
