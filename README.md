@@ -1,6 +1,6 @@
-## Chat with PDF and Images (pdf-chat)
+## Chat with PDF and Images
 
-A Next.js 14 app that lets you upload PDFs or images, then chat with the content. It can summarize pages, answer questions grounded in the selected page, analyze resumes against a job description, generate audio from text, and rewrite code to reduce plagiarism. Uploads are handled via Edge Store and data is stored in Firebase.
+A Next.js 14 app that lets you upload PDFs or images, then chat with the content. It can summarize pages, answer questions grounded in the selected page, analyze resumes against a job description. Uploads are handled via Edge Store and data is stored in Firebase.
 
 ### Key Features
 - **Chat over PDFs**: Extracts text per page using LangChain `PDFLoader`, maintains short chat history, and streams answers from OpenAI.
@@ -18,7 +18,6 @@ A Next.js 14 app that lets you upload PDFs or images, then chat with the content
 | PDF Handling | LangChain `PDFLoader`, `react-pdf` | Load pages, render PDFs in the UI |
 | Image Q&A | OpenAI Vision | Understands content from images |
 | LLMs | OpenAI Chat Completions | Generates summaries and answers |
-| TTS | OpenAI `tts-1` | Generates MP3 files from text |
 | State | Zustand | Local app state management |
 | Data | Firebase Auth, Firestore, Storage | Auth, message history, and asset storage |
 | Deployment | Vercel | Fast serverless hosting |
@@ -61,7 +60,7 @@ Required
 # OpenAI
 OPENAI_API_KEY=...
 
-# Firebase (Web app config)
+# Firebase
 NEXT_PUBLIC_FIREBASE_API_KEY=...
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
