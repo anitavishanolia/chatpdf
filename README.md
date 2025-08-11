@@ -36,7 +36,7 @@ Optional utilities exist for Google Gemini and Pinecone, but they are not requir
 ### Getting Started
 ```bash
 # Clone
-git clone <https://github.com/anitavishanolia/chatpdf.git>
+git clone https://github.com/anitavishanolia/chatpdf.git
 cd pdf-chat
 
 # Install deps
