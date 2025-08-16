@@ -1,4 +1,5 @@
 import { config } from "process";
+import path from "path";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

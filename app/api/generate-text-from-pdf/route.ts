@@ -10,69 +10,65 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { openai } from "@/lib/openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { OpenAIStream, StreamingTextResponse } from "ai"; // You can keep StreamingTextResponse or write custom streaming
+
+
+const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { pdfURL, message, pageNo, user, messageId } = body;
-    let pdfResponse = await fetch(pdfURL);
-    let blob = await pdfResponse.blob();
+
+    // Load PDF
+    const pdfResponse = await fetch(pdfURL);
+    const blob = await pdfResponse.blob();
     const loader = new PDFLoader(blob);
     const pageLevelDocs = await loader.load();
     console.dir(pageLevelDocs);
-    const pagesAmt = pageLevelDocs.length;
-    const messageRef = collection(
-      db,
-      `${user?.email}/files/pdf/${messageId}/chats`
-    );
+
+    // Load previous messages from Firestore
+    const messageRef = collection(db, `${user?.email}/files/pdf/${messageId}/chats`);
     const q = query(messageRef, orderBy("timestamp", "desc"), limit(5));
     const querySnapshot = await getDocs(q);
-    let prevMessages: any[] = [];
+
+    const prevMessages: any[] = [];
     querySnapshot.forEach((doc: any) => {
       prevMessages.push({ id: doc.id, ...doc.data() });
     });
+
     const formattedPrevMessages = prevMessages?.map((msg: any) => ({
-      role: msg.sender ? ("user" as const) : ("assistant" as const),
+      role: msg.sender ? "user" as const : "assistant" as const,
       content: msg.text,
     }));
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      temperature: 0,
-      stream: true,
-      messages: [
-        {
-          role: "system",
-          content:
-            "Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.",
-        },
-        {
-          role: "user",
-          content: `Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format. \nif you can provide relavent answer please provide
+    // Combine context for AI
+    const prompt = `
+Use the following pieces of context (or previous conversation if needed) to answer the user's question in **Markdown format**.
 
-          \n--------------\n
+PREVIOUS CONVERSATION:
+${formattedPrevMessages.map((m: any) => m.role === "user" ? `User: ${m.content}` : `Assistant: ${m.content}`).join("\n")}
 
-          PREVIOUS CONVERSATION:
-          ${formattedPrevMessages.map((message: any) => {
-            if (message.role === "user") return `User: ${message.cotent}\n`;
-            return `Assistant: ${message.content}`;
-          })}
+CONTEXT (from PDF page ${pageNo}):
+${pageLevelDocs[pageNo - 1].pageContent}
 
-          \n---------------\n
-          CONTEXT:
-          ${pageLevelDocs[pageNo - 1].pageContent}
+USER INPUT:
+${message}
+`;
 
-          \n---------------\n
-          USER INPUT: ${message}
-          `,
-        },
-      ],
-      max_tokens: 4096,
+    // Call Gemini model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent([{ text: prompt }]);
+
+    const markdownText = result.response.text();
+
+    // Return as streaming response (or plain text)
+    return new NextResponse(markdownText, {
+      status: 200,
+      headers: { "Content-Type": "text/markdown" },
     });
-    const stream = OpenAIStream(response);
-    return new StreamingTextResponse(stream);
+
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
