@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { OpenAIStream, StreamingTextResponse } from "ai"; // You can keep StreamingTextResponse or write custom streaming
+
 
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
