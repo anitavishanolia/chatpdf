@@ -1,14 +1,14 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY!, {
-  apiVersion: "v1beta", // REQUIRED for 2.5 models
-});
-
 export async function POST(request: NextRequest) {
   try {
     const { imageURL, prompt } = await request.json();
 
+    // Create Gemini client
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+
+    // Create model instance
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash-lite",
     });
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const imageBuffer = await imageResponse.arrayBuffer();
     const imageBase64 = Buffer.from(imageBuffer).toString("base64");
 
-    // Generate content
+    // Generate markdown content
     const result = await model.generateContent([
       {
         text:
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       headers: { "Content-Type": "text/markdown" },
     });
   } catch (error: any) {
+    console.error(error);
     return new NextResponse(`Error: ${error.message}`, { status: 500 });
   }
 }
