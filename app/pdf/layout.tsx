@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <>
       <MobileSidebar />
-      <div className="flex overflow-y-hidden   h-screen  ">
+      <div className="flex overflow-y-hidden h-screen ">
         <Sidebar />
         {children}
       </div>
