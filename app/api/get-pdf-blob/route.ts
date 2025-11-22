@@ -1,5 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+export const runtime = "nodejs";
+
 async function pdfURLToBase64(pdfURL: string) {
   try {
     const response = await axios.get(pdfURL, {

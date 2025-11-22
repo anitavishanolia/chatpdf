@@ -11,6 +11,8 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+export const runtime = "nodejs";
+
 
 
 

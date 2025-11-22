@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { storage } from "@/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { openai } from "@/lib/openai";
+export const runtime = "nodejs";
+
 
 export async function POST(req: NextRequest) {
   try {

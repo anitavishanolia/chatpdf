@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+export const runtime = "nodejs";
+
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
