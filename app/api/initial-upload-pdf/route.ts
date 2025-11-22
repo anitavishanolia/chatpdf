@@ -5,12 +5,13 @@ export const runtime = "nodejs";
 
 
 // Load API key from environment
-const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
+
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { pdfURL, pageNo } = body;
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
     // Load PDF
     const pdfResponse = await fetch(pdfURL);

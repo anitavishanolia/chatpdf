@@ -4,12 +4,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export const runtime = "nodejs";
 
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
+
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { pdfURL, user, messageId, jobDesc } = body;
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
     // Load PDF
     const pdfResponse = await fetch(pdfURL);

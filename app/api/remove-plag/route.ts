@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { code } = body;
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
     const prompt = `
 Use the following code and provide a plagiarism-free version in the same programming language. 
